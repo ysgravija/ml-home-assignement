@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  checks: write
 
 jobs:
   build:
@@ -19,6 +20,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+        cache: gradle
     - name: Build with Gradle
       run: ./gradlew clean check
     - name: JUnit Tests
