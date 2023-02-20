@@ -1,13 +1,41 @@
-# Home Assignment
+# Technical Assignment
 
-## Get feature by User
+## Overview
+A simple application that exposes two APIs to manage users' access to features. 
+The application is using in-memory database to store records of feature accesses.
+
+## Database structure
+The following is the database structure of `features` table.
+
+| Column         | Description                                       |
+|----------------|---------------------------------------------------|
+| `id`           | Generated sequential ID and is a primary key.     |
+| `feature_name` | Feature name is a unique constraint.              |
+| `email`        | User email is a unique constraint.                |
+| `enable`       | Flag to determine feature is enabled or disabled. |
+
+## Build
 ```shell
-  curl -v "http://localhost:9191/demo/feature?email=tyeesheng@yahoo.com&featureName=loan"
+./gradlew clean build
 ```
 
-## Update feature by User
+## Run
+```shell
+java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
+```
+
+## Testing
+Run spring boot application first. Then, use the `cURL` command line as shown in the example below (or `Postman` tool).
+
+### Add/Update feature access
+Add or update feature access.
 ```shell
     curl --header "Content-Type: application/json" \
-    -d "{\"email\":\"tyeesheng@yahoo.com\", \"featureName\":\"loan\", \"enable\":\"false\"}" \
-    -v http://localhost:9191/demo/feature
+    -d "{\"email\":\"newUser@gmail.com\", \"featureName\":\"newFeature\", \"enable\":\"true\"}" \
+    -v http://localhost:9191/feature
+```
+### Get feature by User
+Retrieve user access by using email and feature name.
+```shell
+  curl -v "http://localhost:9191/feature?email=newUser@gmail.com&featureName=newFeature"
 ```

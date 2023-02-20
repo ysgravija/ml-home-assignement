@@ -5,6 +5,7 @@ import com.example.demo.model.FeatureAccessRequest;
 import com.example.demo.service.FeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +29,7 @@ public class FeatureController {
         return featureService.getFeatureByUser(email, featureName);
     }
 
-    @PostMapping
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createOrUpdateFeatureForUser(@Valid @RequestBody FeatureAccessRequest request) {
         return featureService.createOrUpdateFeatureForUser(request)
                 ? new ResponseEntity<>(HttpStatus.OK)
