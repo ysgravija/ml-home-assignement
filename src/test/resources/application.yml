@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:demodb;DB_CLOSE_ON_EXIT=FALSE
+
+    jpa:
+      database: h2
+      hibernate:
+        ddl-auto: create
