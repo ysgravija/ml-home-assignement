@@ -21,3 +21,13 @@ jobs:
         distribution: 'temurin'
     - name: Build with Gradle
       run: ./gradlew clean check
+    - name: JUnit Tests
+      uses: dorny/test-reporter@v1
+      if: ${{ always() }}
+      with:
+        name: JUnit Tests (${{ runner.os }}, dorny/test-reporter@v1)
+        # Comma-separated values.
+        path: "**/build/test-results/*/TEST-*.xml"
+        reporter: java-junit
+
+
