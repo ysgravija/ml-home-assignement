@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @Builder
-public class GetFeatureInfo {
+public class FeatureAccessResponse {
     private boolean canAccess;
 }
