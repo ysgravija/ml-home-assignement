@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.FeatureAccessRequest;
 import com.example.demo.model.FeatureAccessResponse;
 import com.example.demo.service.FeatureService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @RestController
+@AllArgsConstructor
 public class FeatureController {
-    @Autowired
     private FeatureService featureService;
 
     @RequestMapping(value = "/feature", method = RequestMethod.GET)

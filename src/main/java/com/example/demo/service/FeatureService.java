@@ -4,16 +4,16 @@ import com.example.demo.controller.exception.FeatureNotFoundException;
 import com.example.demo.entity.FeatureEntity;
 import com.example.demo.model.FeatureAccessResponse;
 import com.example.demo.repository.FeatureRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class FeatureService {
-    @Autowired
-    private FeatureRepository featureRepository;
+    private final FeatureRepository featureRepository;
 
     public FeatureAccessResponse getFeatureByUser(String email, String featureName) {
         FeatureEntity featureEntity = featureRepository.getFeatureInfo(email, featureName).orElseThrow(
