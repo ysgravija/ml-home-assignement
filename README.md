@@ -25,16 +25,24 @@ java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
 ```
 
 ## Testing
-Run spring boot application first. Then, use the `cURL` command line as shown in the example below (or `Postman` tool).
+Run spring boot application first. Then, use either `Swagger UI` or the `cURL` command line with example shown below to test the APIs. 
 
-### Add/Update feature access
+
+### Swagger 2 UI
+Test API on on Swagger UI
+```shell
+http://localhost:9191/swagger-ui/index.html
+```
+
+### cURL
+#### Add/Update feature access
 Add or update feature access.
 ```shell
     curl --header "Content-Type: application/json" \
     -d "{\"email\":\"newUser@gmail.com\", \"featureName\":\"newFeature\", \"enable\":\"true\"}" \
     -v http://localhost:9191/feature
 ```
-### Get feature by User
+#### Get feature by User
 Retrieve user access by using email and feature name.
 ```shell
   curl -v "http://localhost:9191/feature?email=newUser@gmail.com&featureName=newFeature"

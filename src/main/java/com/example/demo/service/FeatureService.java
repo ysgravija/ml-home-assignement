@@ -3,7 +3,6 @@ package com.example.demo.service;
 import com.example.demo.controller.exception.FeatureNotFoundException;
 import com.example.demo.entity.FeatureEntity;
 import com.example.demo.model.FeatureAccessResponse;
-import com.example.demo.model.FeatureAccessRequest;
 import com.example.demo.repository.FeatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,24 +23,21 @@ public class FeatureService {
     }
 
     @Transactional
-    public boolean createOrUpdateFeatureForUser(FeatureAccessRequest request) {
-        Optional<FeatureEntity> feature = featureRepository.findFeatureForUpdate(
-                request.getEmail(), request.getFeatureName()
-        );
-
+    public boolean updateUserFeatureAccess(String email, String featureName, boolean isEnable) {
+        Optional<FeatureEntity> feature = featureRepository.findFeatureForUpdate(email, featureName);
         FeatureEntity entityToUpdate;
         if (feature.isPresent()) {
-            if (feature.get().getIsEnable() == request.isEnable()) {
+            if (feature.get().getIsEnable() == isEnable) {
                 return false;
             } else {
                 entityToUpdate = feature.get();
-                entityToUpdate.setIsEnable(request.isEnable());
+                entityToUpdate.setIsEnable(isEnable);
             }
         } else {
             entityToUpdate = FeatureEntity.builder()
-                    .email(request.getEmail())
-                    .featureName(request.getFeatureName())
-                    .isEnable(request.isEnable())
+                    .email(email)
+                    .featureName(featureName)
+                    .isEnable(isEnable)
                     .build();
         }
         featureRepository.save(entityToUpdate);
